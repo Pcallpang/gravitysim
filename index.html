@@ -1,105 +1,88 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:100%;background:transparent;}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
 :root{
   --dk:#0f1117;--dk2:#181b26;--dk3:#1f2235;--dk4:#272c42;
   --acc:#4a9eff;--acc2:#e24b4a;--acc3:#22c987;
   --txt:#e8eaf0;--txt2:#9aa0b8;--txt3:#4e5470;
   --brd:rgba(255,255,255,0.07);--brd2:rgba(255,255,255,0.13);
 }
-.root{
-  background:var(--dk);
-  width:100%;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  font-family:var(--font-sans);
-}
-.tab-bar{
-  display:flex;
-  background:var(--dk2);
-  border-bottom:1px solid var(--brd);
-  flex-shrink:0;
-}
-.tab-btn{
-  flex:1;padding:13px 4px;background:transparent;border:none;cursor:pointer;
-  font-size:12px;font-weight:500;color:var(--txt3);
-  border-bottom:2px solid transparent;transition:all .15s;
-}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+body{font-family:var(--font-sans);background:transparent;}
+.root{background:var(--dk);border-radius:14px;overflow:hidden;width:100%;}
+
+.tab-bar{display:flex;background:var(--dk2);border-bottom:1px solid var(--brd);}
+.tab-btn{flex:1;padding:9px 4px;background:transparent;border:none;cursor:pointer;font-size:12px;font-weight:500;color:var(--txt3);border-bottom:2px solid transparent;transition:all .15s;}
 .tab-btn.active{color:var(--acc);border-bottom-color:var(--acc);background:rgba(74,158,255,.05);}
-.panel{display:none;flex:1;overflow-y:auto;padding:12px;}
+
+.panel{display:none;padding:10px;}
 .panel.active{display:block;}
 
-.legend{display:flex;gap:14px;margin-bottom:8px;}
-.leg{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt2);}
-.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.sim-layout{display:grid;grid-template-columns:1fr 200px;gap:10px;align-items:start;}
 
-.canvas-wrap{width:100%;border-radius:10px;overflow:hidden;background:#080b12;margin-bottom:10px;}
+.canvas-wrap{border-radius:8px;overflow:hidden;background:#080b12;}
 canvas#sc{display:block;width:100%;height:auto;}
 
-.ctrl-section{display:flex;flex-direction:column;gap:8px;}
-.cc{background:var(--dk2);border:1px solid var(--brd);border-radius:10px;padding:11px 13px;}
-.ch{font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
-.cr{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.legend{display:flex;gap:10px;margin-bottom:6px;}
+.leg{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--txt2);}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.ctrl-col{display:flex;flex-direction:column;gap:7px;}
+.cc{background:var(--dk2);border:1px solid var(--brd);border-radius:8px;padding:9px 11px;}
+.ch{font-size:9px;font-weight:500;color:var(--txt3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px;}
+.cr{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
 .cr:last-child{margin-bottom:0;}
-.cr label{font-size:12px;color:var(--txt2);width:68px;flex-shrink:0;}
-.cr input[type=range]{flex:1;accent-color:var(--acc);height:20px;}
-.cr span{font-size:12px;font-weight:500;color:var(--txt);width:32px;text-align:right;flex-shrink:0;}
-.opt-row{display:flex;flex-direction:column;gap:7px;}
-.opt-lbl{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--txt2);cursor:pointer;}
-.opt-lbl input{accent-color:var(--acc);width:15px;height:15px;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.sb{background:var(--dk3);border-radius:7px;padding:7px 9px;}
-.sb .sl{font-size:10px;color:var(--txt3);margin-bottom:2px;}
-.sb .sv{font-size:14px;font-weight:500;color:var(--txt);}
-.btn-row{display:grid;grid-template-columns:2fr 1fr;gap:8px;}
-.pb{padding:11px 0;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;}
+.cr label{font-size:11px;color:var(--txt2);width:60px;flex-shrink:0;}
+.cr input[type=range]{flex:1;accent-color:var(--acc);height:16px;}
+.cr span{font-size:11px;font-weight:500;color:var(--txt);width:28px;text-align:right;flex-shrink:0;}
+.opt-row{display:flex;flex-direction:column;gap:5px;}
+.opt-lbl{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--txt2);cursor:pointer;}
+.opt-lbl input{accent-color:var(--acc);width:13px;height:13px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.sb{background:var(--dk3);border-radius:6px;padding:5px 7px;}
+.sb .sl{font-size:9px;color:var(--txt3);margin-bottom:1px;}
+.sb .sv{font-size:12px;font-weight:500;color:var(--txt);}
+.btn-row{display:grid;grid-template-columns:2fr 1fr;gap:6px;}
+.pb{padding:8px 0;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s;}
 .pb.play{background:var(--acc);color:#fff;}
 .pb.rst{background:var(--dk3);color:var(--txt2);border:1px solid var(--brd2);}
 
 .id-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.fi{background:var(--dk3);border:1px solid var(--brd2);border-radius:8px;padding:10px 12px;color:var(--txt);font-size:13px;width:100%;outline:none;font-family:var(--font-sans);}
+.fi{background:var(--dk3);border:1px solid var(--brd2);border-radius:7px;padding:8px 10px;color:var(--txt);font-size:12px;width:100%;outline:none;font-family:var(--font-sans);}
 .fi:focus{border-color:var(--acc);}
 .fi::placeholder{color:var(--txt3);}
-
-.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
 .sec-hd span{font-size:12px;font-weight:500;color:var(--txt2);}
-.fill-btn{padding:5px 10px;background:rgba(74,158,255,.13);border:1px solid rgba(74,158,255,.28);border-radius:6px;color:var(--acc);font-size:11px;cursor:pointer;font-family:var(--font-sans);}
-.rst-tbl{padding:5px 10px;background:var(--dk3);border:1px solid var(--brd2);border-radius:6px;color:var(--txt3);font-size:11px;cursor:pointer;font-family:var(--font-sans);}
-
-.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:9px;border:1px solid var(--brd);}
-table.rt{border-collapse:collapse;font-size:11px;width:100%;min-width:320px;}
-table.rt th,table.rt td{border:1px solid var(--brd);padding:7px 4px;text-align:center;color:var(--txt2);}
+.fill-btn{padding:4px 9px;background:rgba(74,158,255,.13);border:1px solid rgba(74,158,255,.28);border-radius:5px;color:var(--acc);font-size:11px;cursor:pointer;font-family:var(--font-sans);}
+.rst-tbl{padding:4px 9px;background:var(--dk3);border:1px solid var(--brd2);border-radius:5px;color:var(--txt3);font-size:11px;cursor:pointer;font-family:var(--font-sans);}
+.tbl-wrap{overflow-x:auto;margin-bottom:10px;border-radius:8px;border:1px solid var(--brd);}
+table.rt{border-collapse:collapse;font-size:11px;width:100%;min-width:300px;}
+table.rt th,table.rt td{border:1px solid var(--brd);padding:6px 4px;text-align:center;color:var(--txt2);}
 table.rt th{background:var(--dk3);font-weight:500;font-size:10px;}
 table.rt .rh{background:var(--dk3);font-size:10px;color:var(--txt3);text-align:left;padding-left:7px;white-space:nowrap;}
 table.rt input{background:transparent;border:none;color:var(--txt);font-size:11px;text-align:center;width:100%;outline:none;padding:0;font-family:var(--font-sans);}
 table.rt input:focus{background:rgba(74,158,255,.12);border-radius:3px;}
-
-.q-block{margin-bottom:9px;}
-.q-block label{display:block;font-size:12px;color:var(--txt2);margin-bottom:5px;font-weight:500;}
-.q-block textarea{width:100%;min-height:62px;padding:9px 11px;border:1px solid var(--brd2);border-radius:8px;background:var(--dk3);color:var(--txt);font-size:12px;font-family:var(--font-sans);outline:none;resize:vertical;line-height:1.6;}
+.q-block{margin-bottom:8px;}
+.q-block label{display:block;font-size:11px;color:var(--txt2);margin-bottom:4px;font-weight:500;}
+.q-block textarea{width:100%;min-height:56px;padding:8px 10px;border:1px solid var(--brd2);border-radius:7px;background:var(--dk3);color:var(--txt);font-size:12px;font-family:var(--font-sans);outline:none;resize:vertical;line-height:1.6;}
 .q-block textarea:focus{border-color:var(--acc);}
 .q-block textarea::placeholder{color:var(--txt3);}
-
-.prev-box{background:var(--dk2);border:1px solid var(--brd);border-radius:10px;padding:12px;margin-bottom:12px;}
-.prev-grid{display:grid;grid-template-columns:56px 1fr;gap:5px 8px;font-size:12px;}
+.prev-box{background:var(--dk2);border:1px solid var(--brd);border-radius:9px;padding:11px;margin-bottom:10px;}
+.prev-grid{display:grid;grid-template-columns:52px 1fr;gap:4px 8px;font-size:11px;}
 .prev-grid .pk{color:var(--txt3);}
 .prev-grid .pv{color:var(--txt);line-height:1.5;word-break:break-all;}
-.sub-btn{width:100%;padding:13px;background:var(--acc3);border:none;border-radius:10px;color:#081a10;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:all .15s;}
-.sub-btn:hover{background:#1db874;}
+.sub-btn{width:100%;padding:11px;background:var(--acc3);border:none;border-radius:9px;color:#081a10;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:all .15s;}
 .sub-btn:disabled{background:var(--dk3);color:var(--txt3);cursor:not-allowed;}
-.toast{margin-top:8px;padding:10px 12px;border-radius:8px;font-size:12px;text-align:center;display:none;}
+.toast{margin-top:7px;padding:9px 11px;border-radius:7px;font-size:11px;text-align:center;display:none;}
 .toast.ok{background:rgba(34,201,135,.13);color:var(--acc3);border:1px solid rgba(34,201,135,.22);}
 .toast.err{background:rgba(226,75,74,.13);color:#e55;border:1px solid rgba(226,75,74,.22);}
-.desc-txt{font-size:12px;color:var(--txt2);line-height:1.7;margin-bottom:12px;}
+.desc-txt{font-size:12px;color:var(--txt2);line-height:1.7;margin-bottom:10px;}
 </style>
 
 <h2 class="sr-only">자유낙하와 수평 투사 운동 비교 실험 시뮬레이터</h2>
 <div class="root">
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('sim',this)"><i class="ti ti-flask" aria-hidden="true"></i> 실험</button>
+    <button class="tab-btn active" onclick="switchTab('sim',this)"><i class="ti ti-flask" aria-hidden="true"></i> 실험 시뮬레이터</button>
     <button class="tab-btn" onclick="switchTab('rec',this)"><i class="ti ti-clipboard-list" aria-hidden="true"></i> 기록표</button>
     <button class="tab-btn" onclick="switchTab('sub',this)"><i class="ti ti-send" aria-hidden="true"></i> 제출</button>
   </div>
@@ -109,35 +92,37 @@ table.rt input:focus{background:rgba(74,158,255,.12);border-radius:3px;}
       <div class="leg"><div class="leg-dot" style="background:#e24b4a;"></div>공 A (자유낙하)</div>
       <div class="leg"><div class="leg-dot" style="background:#4a9eff;"></div>공 B (수평 투사)</div>
     </div>
-    <div class="canvas-wrap">
-      <canvas id="sc"></canvas>
-    </div>
-    <div class="ctrl-section">
-      <div class="cc">
-        <div class="ch">실험 설정</div>
-        <div class="cr"><label>B 수평속도</label><input type="range" id="vxS" min="50" max="300" value="150" step="10"><span id="vxV">150</span></div>
-        <div class="cr"><label>중력 (m/s²)</label><input type="range" id="gS" min="5" max="20" value="10" step="1"><span id="gV">10</span></div>
+    <div class="sim-layout">
+      <div>
+        <div class="canvas-wrap"><canvas id="sc"></canvas></div>
       </div>
-      <div class="cc">
-        <div class="ch">표시 옵션</div>
-        <div class="opt-row">
-          <label class="opt-lbl"><input type="checkbox" id="chkT" checked> 궤적</label>
-          <label class="opt-lbl"><input type="checkbox" id="chkM" checked> 시간 마커 (0.1s)</label>
-          <label class="opt-lbl"><input type="checkbox" id="chkG"> 격자</label>
+      <div class="ctrl-col">
+        <div class="cc">
+          <div class="ch">실험 설정</div>
+          <div class="cr"><label>B 수평속도</label><input type="range" id="vxS" min="50" max="300" value="150" step="10"><span id="vxV">150</span></div>
+          <div class="cr"><label>중력(m/s²)</label><input type="range" id="gS" min="5" max="20" value="10" step="1"><span id="gV">10</span></div>
         </div>
-      </div>
-      <div class="cc">
-        <div class="ch">현재 상태</div>
-        <div class="stat-grid">
-          <div class="sb"><div class="sl">경과 시간</div><div class="sv" id="stT">0.00s</div></div>
-          <div class="sb"><div class="sl">공 A 낙하</div><div class="sv" id="stAy">0cm</div></div>
-          <div class="sb"><div class="sl">공 B 수평</div><div class="sv" id="stBx">0cm</div></div>
-          <div class="sb"><div class="sl">공 B 낙하</div><div class="sv" id="stBy">0cm</div></div>
+        <div class="cc">
+          <div class="ch">표시</div>
+          <div class="opt-row">
+            <label class="opt-lbl"><input type="checkbox" id="chkT" checked> 궤적</label>
+            <label class="opt-lbl"><input type="checkbox" id="chkM" checked> 시간 마커(0.1s)</label>
+            <label class="opt-lbl"><input type="checkbox" id="chkG"> 격자</label>
+          </div>
         </div>
-      </div>
-      <div class="btn-row">
-        <button class="pb play" id="playBtn" onclick="togglePlay()">▶ 시작</button>
-        <button class="pb rst" onclick="resetSim()">↺ 초기화</button>
+        <div class="cc">
+          <div class="ch">현재 상태</div>
+          <div class="stat-grid">
+            <div class="sb"><div class="sl">경과 시간</div><div class="sv" id="stT">0.00s</div></div>
+            <div class="sb"><div class="sl">A 낙하</div><div class="sv" id="stAy">0cm</div></div>
+            <div class="sb"><div class="sl">B 수평</div><div class="sv" id="stBx">0cm</div></div>
+            <div class="sb"><div class="sl">B 낙하</div><div class="sv" id="stBy">0cm</div></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="pb play" id="playBtn" onclick="togglePlay()">▶ 시작</button>
+          <button class="pb rst" onclick="resetSim()">↺ 초기화</button>
+        </div>
       </div>
     </div>
   </div>
@@ -162,13 +147,11 @@ table.rt input:focus{background:rgba(74,158,255,.12);border-radius:3px;}
         </thead>
         <tbody>
           <tr>
-            <td class="rh" rowspan="1">공 A</td>
-            <td class="rh">연직(cm)</td>
+            <td class="rh">공 A</td><td class="rh">연직(cm)</td>
             <td><input id="ay1" placeholder="-"></td><td><input id="ay2" placeholder="-"></td><td><input id="ay3" placeholder="-"></td><td><input id="ay4" placeholder="-"></td><td><input id="ay5" placeholder="-"></td>
           </tr>
           <tr>
-            <td class="rh" rowspan="2">공 B</td>
-            <td class="rh">수평(cm)</td>
+            <td class="rh" rowspan="2">공 B</td><td class="rh">수평(cm)</td>
             <td><input id="bx1" placeholder="-"></td><td><input id="bx2" placeholder="-"></td><td><input id="bx3" placeholder="-"></td><td><input id="bx4" placeholder="-"></td><td><input id="bx5" placeholder="-"></td>
           </tr>
           <tr>
@@ -178,25 +161,16 @@ table.rt input:focus{background:rgba(74,158,255,.12);border-radius:3px;}
         </tbody>
       </table>
     </div>
-    <div class="sec-hd"><span>탐구 결과 정리</span></div>
-    <div class="q-block">
-      <label>① 수평 방향 운동 비교</label>
-      <textarea id="q1" placeholder="공 A는 수평 방향으로... 공 B는... 따라서..."></textarea>
-    </div>
-    <div class="q-block">
-      <label>② 연직 방향 운동 비교</label>
-      <textarea id="q2" placeholder="두 공의 연직 방향 운동을 비교하면..."></textarea>
-    </div>
-    <div class="q-block">
-      <label>③ 공통점 — 중력과 관련지어</label>
-      <textarea id="q3" placeholder="두 공의 공통점은... 중력과 관련지으면..."></textarea>
-    </div>
+    <div class="sec-hd" style="margin-bottom:8px;"><span>탐구 결과 정리</span></div>
+    <div class="q-block"><label>① 수평 방향 운동 비교</label><textarea id="q1" placeholder="공 A는 수평 방향으로... 공 B는... 따라서..."></textarea></div>
+    <div class="q-block"><label>② 연직 방향 운동 비교</label><textarea id="q2" placeholder="두 공의 연직 방향 운동을 비교하면..."></textarea></div>
+    <div class="q-block"><label>③ 공통점 — 중력과 관련지어</label><textarea id="q3" placeholder="두 공의 공통점은... 중력과 관련지으면..."></textarea></div>
   </div>
 
   <div id="tab-sub" class="panel">
     <p class="desc-txt">기록표 탭에서 학번, 이름, 탐구 결과를 작성한 후 제출하면 선생님의 구글 스프레드시트로 전송됩니다.</p>
     <div class="prev-box">
-      <div class="ch" style="font-size:10px;font-weight:500;color:var(--txt3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;">제출 내용 미리보기</div>
+      <div class="ch" style="font-size:9px;font-weight:500;color:var(--txt3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;">제출 내용 미리보기</div>
       <div class="prev-grid">
         <span class="pk">학번</span><span class="pv" id="pv-id"></span>
         <span class="pk">이름</span><span class="pv" id="pv-name"></span>
@@ -212,7 +186,6 @@ table.rt input:focus{background:rgba(74,158,255,.12);border-radius:3px;}
 
 <script>
 const SHEET_URL="https://script.google.com/macros/s/AKfycbw2uibjPm4ohPh-75R1SppOd_sQx9LEC0b8fP7RcbyTOX0Qcp7CXNDOnxDvyv6Arpdj/exec";
-
 const cv=document.getElementById('sc');
 const ctx=cv.getContext('2d');
 let g=10,vx0=150,simT=0,running=false,rafId=null,lastTs=null;
@@ -221,70 +194,67 @@ const MAX_T=0.6;
 
 function initCanvas(){
   const wrap=cv.parentElement;
-  const W=wrap.clientWidth||340;
-  const H=Math.round(W*0.62);
+  const W=Math.max(wrap.clientWidth||280,200);
+  const H=Math.round(W*0.68);
   cv.width=W;cv.height=H;
   drawFrame();
 }
 
-function scale(){const H=cv.height;return H/(0.5*g*MAX_T*MAX_T*100*1.12);}
-function ML(){return Math.round(cv.width*0.13);}
-function MT(){return Math.round(cv.height*0.1);}
-function SW(){return cv.width-ML()-Math.round(cv.width*0.04);}
-function SH(){return cv.height-MT()-Math.round(cv.height*0.1);}
+function ml(){return Math.round(cv.width*0.14);}
+function mt(){return Math.round(cv.height*0.1);}
+function sw(){return cv.width-ml()-Math.round(cv.width*0.03);}
+function sh(){return cv.height-mt()-Math.round(cv.height*0.09);}
+function sc2(){return sh()/(0.5*g*MAX_T*MAX_T*100*1.1);}
 
 function getPos(t){return{ay:0.5*g*t*t*100,bx:vx0*t,by:0.5*g*t*t*100};}
-function toC(x,y){let s=scale();return{cx:ML()+x*s,cy:MT()+y*s};}
+function toC(x,y){return{cx:ml()+x*sc2(),cy:mt()+y*sc2()};}
 
 function drawFrame(){
   const W=cv.width,H=cv.height;
-  const ml=ML(),mt=MT(),sw=SW(),sh=SH();
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='#080b12';ctx.fillRect(0,0,W,H);
+  const _ml=ml(),_mt=mt(),_sw=sw(),_sh=sh();
 
   if(document.getElementById('chkG').checked){
     ctx.strokeStyle='rgba(255,255,255,0.04)';ctx.lineWidth=0.5;
-    for(let i=0;i<=8;i++){let x=ml+(sw/8)*i;ctx.beginPath();ctx.moveTo(x,mt);ctx.lineTo(x,mt+sh);ctx.stroke();}
-    for(let i=0;i<=5;i++){let y=mt+(sh/5)*i;ctx.beginPath();ctx.moveTo(ml,y);ctx.lineTo(ml+sw,y);ctx.stroke();}
+    for(let i=0;i<=8;i++){let x=_ml+(_sw/8)*i;ctx.beginPath();ctx.moveTo(x,_mt);ctx.lineTo(x,_mt+_sh);ctx.stroke();}
+    for(let i=0;i<=5;i++){let y=_mt+(_sh/5)*i;ctx.beginPath();ctx.moveTo(_ml,y);ctx.lineTo(_ml+_sw,y);ctx.stroke();}
   }
-
   ctx.strokeStyle='rgba(255,255,255,0.12)';ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(ml,mt);ctx.lineTo(ml,mt+sh);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(ml,mt);ctx.lineTo(ml+sw,mt);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(_ml,_mt);ctx.lineTo(_ml,_mt+_sh);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(_ml,_mt);ctx.lineTo(_ml+_sw,_mt);ctx.stroke();
 
-  const fs=Math.max(9,Math.round(W*0.026));
+  const fs=Math.max(8,Math.round(W*0.027));
   ctx.font=fs+'px var(--font-sans)';ctx.fillStyle='rgba(255,255,255,0.28)';
   let maxY=0.5*g*MAX_T*MAX_T*100;
   ctx.textAlign='right';
-  for(let i=0;i<=3;i++){let cm=Math.round(maxY*i/3);let cy=mt+(sh*i/3);ctx.fillText(cm+'cm',ml-4,cy+4);}
+  for(let i=0;i<=3;i++){let cm=Math.round(maxY*i/3);let cy=_mt+(_sh*i/3);ctx.fillText(cm+'cm',_ml-3,cy+3);}
   let maxX=vx0*MAX_T;
   ctx.textAlign='center';
-  for(let i=0;i<=3;i++){let cm=Math.round(maxX*i/3);let cx=ml+(sw*i/3);ctx.fillText(cm+'cm',cx,mt-5);}
+  for(let i=0;i<=3;i++){let cm=Math.round(maxX*i/3);let cx=_ml+(_sw*i/3);ctx.fillText(cm+'cm',cx,_mt-4);}
 
   if(document.getElementById('chkT').checked){
     if(trailA.length>1){
-      ctx.beginPath();ctx.strokeStyle='rgba(226,75,74,0.28)';ctx.lineWidth=Math.max(1,W*0.004);
+      ctx.beginPath();ctx.strokeStyle='rgba(226,75,74,0.3)';ctx.lineWidth=1.5;
       trailA.forEach((p,i)=>{let c=toC(0,p.ay);if(i===0)ctx.moveTo(c.cx,c.cy);else ctx.lineTo(c.cx,c.cy);});ctx.stroke();
     }
     if(trailB.length>1){
-      ctx.beginPath();ctx.strokeStyle='rgba(74,158,255,0.28)';ctx.lineWidth=Math.max(1,W*0.004);
+      ctx.beginPath();ctx.strokeStyle='rgba(74,158,255,0.3)';ctx.lineWidth=1.5;
       trailB.forEach((p,i)=>{let c=toC(p.bx,p.by);if(i===0)ctx.moveTo(c.cx,c.cy);else ctx.lineTo(c.cx,c.cy);});ctx.stroke();
     }
   }
-
   if(document.getElementById('chkM').checked){
     markers.forEach(m=>{
       let cA=toC(0,m.ay);
-      ctx.beginPath();ctx.arc(cA.cx,cA.cy,3,0,Math.PI*2);ctx.fillStyle='rgba(226,75,74,0.65)';ctx.fill();
+      ctx.beginPath();ctx.arc(cA.cx,cA.cy,2.5,0,Math.PI*2);ctx.fillStyle='rgba(226,75,74,0.7)';ctx.fill();
       let cB=toC(m.bx,m.by);
-      ctx.beginPath();ctx.arc(cB.cx,cB.cy,3,0,Math.PI*2);ctx.fillStyle='rgba(74,158,255,0.65)';ctx.fill();
+      ctx.beginPath();ctx.arc(cB.cx,cB.cy,2.5,0,Math.PI*2);ctx.fillStyle='rgba(74,158,255,0.7)';ctx.fill();
       ctx.fillStyle='rgba(255,255,255,0.38)';ctx.font=(fs-1)+'px var(--font-sans)';ctx.textAlign='left';
-      ctx.fillText(m.t.toFixed(1)+'s',cA.cx+4,cA.cy-2);
+      ctx.fillText(m.t.toFixed(1)+'s',cA.cx+3,cA.cy-1);
     });
   }
-
   let pos=getPos(simT);
-  const r=Math.max(7,Math.round(W*0.022));
+  const r=Math.max(6,Math.round(W*0.02));
   let cA=toC(0,pos.ay);
   ctx.beginPath();ctx.arc(cA.cx,cA.cy,r,0,Math.PI*2);ctx.fillStyle='#e24b4a';ctx.fill();
   ctx.fillStyle='#fff';ctx.font='bold '+(r-1)+'px var(--font-sans)';ctx.textAlign='center';ctx.fillText('A',cA.cx,cA.cy+r*0.38);
@@ -306,7 +276,7 @@ function loop(ts){
   let next=markers.length===0?0.1:markers[markers.length-1].t+0.1;
   if(simT>=next-0.001&&next<=MAX_T+0.001){let mp=getPos(next);markers.push({t:next,...mp});}
   drawFrame();
-  if(simT<MAX_T&&running){rafId=requestAnimationFrame(loop);}
+  if(simT<MAX_T&&running)rafId=requestAnimationFrame(loop);
   else{running=false;document.getElementById('playBtn').textContent='▶ 다시 시작';lastTs=null;}
 }
 
@@ -333,7 +303,7 @@ function switchTab(name,btn){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
-  if(name==='sim'){setTimeout(()=>{initCanvas();},30);}
+  if(name==='sim')setTimeout(()=>initCanvas(),30);
   if(name==='sub')updatePreview();
 }
 
@@ -343,13 +313,12 @@ function calcIntervals(){
   let times=[0.1,0.2,0.3,0.4,0.5],ay=[],bx=[],by=[];
   for(let i=0;i<times.length;i++){
     let t1=i===0?0:times[i-1],t2=times[i];
-    let y1=0.5*gv*t1*t1*100,y2=0.5*gv*t2*t2*100;
-    let x1=vv*t1,x2=vv*t2;
-    ay.push((y2-y1).toFixed(1));bx.push((x2-x1).toFixed(1));by.push((y2-y1).toFixed(1));
+    ay.push((0.5*gv*t2*t2*100-0.5*gv*t1*t1*100).toFixed(1));
+    bx.push((vv*(t2-t1)).toFixed(1));
+    by.push((0.5*gv*t2*t2*100-0.5*gv*t1*t1*100).toFixed(1));
   }
   return{ay,bx,by};
 }
-
 function autoFill(){
   let{ay,bx,by}=calcIntervals();
   for(let i=1;i<=5;i++){
@@ -358,12 +327,10 @@ function autoFill(){
     document.getElementById('by'+i).value=by[i-1];
   }
 }
-
 function resetTable(){
   for(let i=1;i<=5;i++){['ay','bx','by'].forEach(k=>document.getElementById(k+i).value='');}
   ['q1','q2','q3','sid','sname'].forEach(id=>document.getElementById(id).value='');
 }
-
 function updatePreview(){
   document.getElementById('pv-id').textContent=document.getElementById('sid').value||'(미입력)';
   document.getElementById('pv-name').textContent=document.getElementById('sname').value||'(미입력)';
@@ -371,7 +338,6 @@ function updatePreview(){
   document.getElementById('pv-q2').textContent=document.getElementById('q2').value||'(미입력)';
   document.getElementById('pv-q3').textContent=document.getElementById('q3').value||'(미입력)';
 }
-
 async function submitData(){
   const sid=document.getElementById('sid').value.trim();
   const sname=document.getElementById('sname').value.trim();
@@ -391,12 +357,10 @@ async function submitData(){
     btn.disabled=false;btn.textContent='구글 스프레드시트로 제출';
   }
 }
-
 function showToast(msg,type){
   const t=document.getElementById('toast');
   t.textContent=msg;t.className='toast '+type;t.style.display='block';
 }
-
 window.addEventListener('resize',()=>{if(document.getElementById('tab-sim').classList.contains('active'))initCanvas();});
 setTimeout(initCanvas,80);
 </script>
